@@ -1,32 +1,35 @@
+from event_logger import log_error
+from students_manager import StudentsManager
+from reminder_generator import generate_reminder
+from reminder_sender import send_reminder
+from logger import log_reminder
 
-from study_reminders.students_manager import StudentsManager
-from study_reminders.reminder_generator import generate_reminder
-from study_reminders.reminder_sender import send_reminder
-from study_reminders.logger import log_reminder
 
+def run_automation(manual_trigger=True):
 
-def run_automation(manual_trigger=False):
-    print("Initializing Study Reminders Automation System...")
-    print("-" * 60)
+    try:
+        print("Initializing Study Reminders Automation System...")
 
-    manager = StudentsManager()
+        manager = StudentsManager()
+        print("\nLoaded Students:")
+        manager.list_students()
 
-    print("\nLoaded Students:")
-    manager.list_students()
-    print("\n" + "-" * 60)
+        if manual_trigger:
+            print("\nManually triggering reminders...\n")
 
-    if manual_trigger:
-        print("\nManually triggering reminders for all students...")
-        for student in manager.get_students():
-            reminder = generate_reminder(student['name'], student['course'])
-            send_reminder(student['email'], reminder)
-            log_reminder(student, reminder)
-        print("\n" + "-" * 60)
-        print("All reminders sent and logged successfully.")
-    else:
-        from study_reminders.scheduler import schedule_reminders
-        print("\nScheduler activated. Running in background...")
-        schedule_reminders(manager, generate_reminder, send_reminder, log_reminder)
+            for student in manager.get_students():
+                reminder = generate_reminder(student['name'], student['course'])
+                send_reminder(student['email'], reminder)
+                log_reminder(student, reminder)
+
+            print("\nAll reminders sent successfully.")
+        else:
+            from scheduler import schedule_reminders
+            schedule_reminders(manager, generate_reminder, send_reminder, log_reminder)
+
+    except Exception as e:
+        log_error("main", str(e))
+        print(f"Error: {str(e)}")
 
 
 if __name__ == "__main__":
