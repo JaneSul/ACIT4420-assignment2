@@ -1,5 +1,4 @@
 import logging
-from datetime import datetime
 
 
 def setup_logging():
@@ -41,25 +40,49 @@ logger = setup_logging()
 
 
 def log_reminder_generated(name, course):
-    """Log when a reminder is generated."""
+    """Log when a reminder is generated.
+
+     Args:
+        name (str): Full name of the student receiving the reminder.
+        course (str): Name of the course the reminder pertains to.
+    """
     logger.info(f"Reminder generated for {name} - Course: {course}")
 
 
 def log_reminder_sent(email, name):
-    """Log when a reminder is sent."""
+    """Log when a reminder is sent.
+
+     Args:
+        name (str): Full name of the student receiving the reminder.
+        email (str): Email of the student receiving the reminder.
+    """
     logger.info(f"Reminder sent to {email} - Student: {name}")
 
 
 def log_scheduler_started(student_count):
-    """Log when the scheduler is started."""
+    """Log when the scheduler is started.
+
+     Args:
+        student_count (int): Number of students to remind.
+    """
     logger.info(f"Scheduler started with {student_count} scheduled reminders")
 
 
 def log_scheduler_job_executed(name, course):
-    """Log when a scheduled job is executed."""
+    """Log when a scheduled job is executed.
+
+     Args:
+        name (str): Full name of the student receiving the reminder.
+        course (str): Name of the course the reminder pertains to.
+    """
     logger.info(f"Scheduled job executed for {name} - Course: {course}")
 
 
 def log_error(component, error_message):
-    """Log system errors."""
+    """Log system errors.
+
+    Args:
+        component (str): Component of the error.
+        error_message (str): Error message.
+    """
     logger.error(f"Error in {component}: {error_message}")

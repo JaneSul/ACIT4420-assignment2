@@ -6,7 +6,11 @@ from logger import log_reminder
 
 
 def run_automation(manual_trigger=True):
+    """Runs the full automation system
 
+    Args:
+        manual_trigger (bool, optional): whether to manually trigger all reminders. Defaults to True.
+    """
     try:
         print("Initializing Study Reminders Automation System...")
 

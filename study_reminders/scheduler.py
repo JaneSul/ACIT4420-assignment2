@@ -47,7 +47,14 @@ def schedule_reminders(students_manager, reminder_generator, reminder_sender, lo
 
 
 def execute_reminder(student, reminder, reminder_sender, logger_func):
-    """Execute scheduled reminder with logging."""
+    """Execute scheduled reminder with logging.
+
+    Args:
+        student (Student): Student instance.
+        reminder (Reminder): Reminder instance.
+        reminder_sender (callable): Function to send reminders.
+        logger_func (callable): Function to log sent reminders.
+    """
     try:
         log_scheduler_job_executed(student["name"], student["course"])
         reminder_sender(student["email"], reminder)
