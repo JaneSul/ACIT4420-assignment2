@@ -27,7 +27,7 @@ This assignment creates a Python package named `study_reminders` to automate sen
 
 1. Clone or extract the package:
 ```bash
-git clone <https://github.com/JaneSul/ACIT4420-assignment2.git>
+git clone https://github.com/JaneSul/ACIT4420-assignment2.git
 cd study_reminders
 ```
 
